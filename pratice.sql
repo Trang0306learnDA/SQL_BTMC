@@ -5,8 +5,8 @@ SELECT
     ItemName,
     ItemGroupId,
     CASE 
-        WHEN ItemGroupId = 20 THEN 'GoldExchange'
-       ELSE 'GoldJewelry'
+        WHEN ItemGroupId = 20 THEN 'Vang Trao doi'
+       ELSE 'Vang Trang suc'
     END AS Goldtype
 FROM 
     OITM;
