@@ -34,10 +34,13 @@ WHERE b.ObjType IN (13, 19, 26);
 --Task 3
 WITH updated_price AS(
 SELECT b.Date, b.Time, a.goldCodeName, a.sellPrice, a.BuyPrice,
-RANK() OVER(PARTITION BY a.goldCodeName, b.Date ORDER BY b.Time DESC) AS rank
+ROW_NUMBER() OVER(PARTITION BY a.goldCodeName, b.Date ORDER BY b.Time DESC) AS rank
 FROM GoldPriceListLine AS a
 JOIN GoldPriceList AS b ON a.FatherId=b.Id)
 
-SELECT * FROM updated_price
+SELECT DATEADD(HOUR, 7, Date) AS Date_UTC7,
+       DATEADD(HOUR, 7, Time) AS Time_UTC7,
+       goldCodeName, sellPrice, BuyPrice 
+FROM updated_price
 WHERE rank=1;
 
