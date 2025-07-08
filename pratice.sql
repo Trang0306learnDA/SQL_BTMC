@@ -38,8 +38,8 @@ ROW_NUMBER() OVER(PARTITION BY a.goldCodeName, b.Date ORDER BY b.Time DESC) AS r
 FROM GoldPriceListLine AS a
 JOIN GoldPriceList AS b ON a.FatherId=b.Id)
 
-SELECT DATEADD(HOUR, 7, Date) AS Date_UTC7,
-       DATEADD(HOUR, 7, Time) AS Time_UTC7,
+SELECT DATEADD(HOUR, 7, Date) AS updated_Date,
+       DATEADD(HOUR, 7, Time) AS updated_Time,
        goldCodeName, sellPrice, BuyPrice 
 FROM updated_price
 WHERE rank=1;
